@@ -5,23 +5,36 @@ import { Input, Menu, Row, Col } from 'antd';
 import UserProfile from './UserProfile';
 import LoginForm from './LoginForm';
 import { useSelector } from 'react-redux';
-
+import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
-
 
 const SearhInput = styled(Input.Search)`
     vertical-align: middle;
 `;
 
+const Global = createGlobalStyle`
+    .ant-row {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+    .ant-col:first-child {
+       paddig-left: 0 !important;
+    }
+    .ant-col:last-child {
+        paddig-right: 0 !important;
+    }
+`
+
 
 const AppLayout = ({ children }) => {
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    // 이제 isLoggedIn이 바뀌면 알아서 리랜더링 된다.
+    const { me } = useSelector((state) => state.user);
+    // 이제 logInLodding 바뀌면 알아서 리랜더링 된다.
     return (
         <div>
+            <Global />
             <Menu mode="horizontal">
                 <Menu.Item>
-                    <Link href="/"><a>부동산</a></Link>
+                    <Link href="/"><a>노드버드</a></Link>
                 </Menu.Item>
                 <Menu.Item>
                     <Link href="/profile"><a>프로필</a></Link>
@@ -35,7 +48,7 @@ const AppLayout = ({ children }) => {
             </Menu>
             <Row gutter={8}>
                 <Col xs={24} md={6}>
-                    {isLoggedIn ? <UserProfile /> : <LoginForm />}
+                    {me ? <UserProfile /> : <LoginForm />}
                 </Col>
                 <Col xs={24} md={12}>
                     {children}

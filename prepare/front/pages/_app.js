@@ -10,7 +10,7 @@ const App = ({ Component }) => { // 여기서 App은 index.js의 부모인셈 Co
         <div>
             <Head>
                 <meta charSet='utf-8' />
-                <title>부동산</title>
+                <title>NodeBird</title>
             </Head>
             <Component />
         </div>
